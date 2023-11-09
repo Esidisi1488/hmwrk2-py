@@ -21,3 +21,16 @@ def generate_users(quantity: int = 100) -> str:
 def get_astronauts_num():
     r = requests.get('http://api.open-notify.org/astros.json')
     return r.json()["number"]
+
+
+def commit_sql(sql: str):
+    import sqlite3
+
+    try:
+        con = sqlite3.connect('example.db')
+        cur = con.cursor()
+        cur.execute(sql)
+        con.commit()
+    finally:
+        con.close()
+
